@@ -60,6 +60,10 @@
 #include <vector>
 #include "utils/log.h"
 
+#ifdef TARGET_POSIX
+#include "linux/XMemUtils.h"
+#endif
+
 namespace XBMCAddon
 {
 
