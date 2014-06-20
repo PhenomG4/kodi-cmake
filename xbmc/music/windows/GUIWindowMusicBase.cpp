@@ -58,6 +58,9 @@
 #include "URL.h"
 #include "music/infoscanner/MusicInfoScanner.h"
 
+#ifdef TARGET_POSIX
+#include "linux/XTimeUtils.h"
+#endif
 
 using namespace std;
 using namespace XFILE;

@@ -33,6 +33,9 @@
 #include "WindowException.h"
 #include "ApplicationMessenger.h"
 #include "Dialog.h"
+#ifdef TARGET_POSIX
+#include "linux/XTimeUtils.h"
+#endif
 
 #define ACTIVE_WINDOW g_windowManager.GetActiveWindow()
 

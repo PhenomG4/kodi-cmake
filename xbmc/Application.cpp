@@ -194,6 +194,7 @@
 
 #ifdef TARGET_POSIX
 #include "XHandle.h"
+#include "XTimeUtils.h"
 #endif
 
 #if defined(TARGET_ANDROID)
