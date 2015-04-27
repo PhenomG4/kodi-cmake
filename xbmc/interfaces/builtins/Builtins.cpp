@@ -130,17 +130,6 @@ using namespace ADDON;
 using namespace MEDIA_DETECT;
 #endif
 
-typedef struct
-{
-  const char* command;
-  bool needsParameters;
-  const char* description;
-} BUILT_IN;
-
-const BUILT_IN commands[] = {
-  { "Help",                       false,  "This help message" },
-};
-
 CBuiltins::CBuiltins()
 {
   RegisterCommands<CAddonBuiltins>();
@@ -184,14 +173,6 @@ bool CBuiltins::HasCommand(const std::string& execString)
   {
     if (it->second.parameters == 0 || it->second.parameters <= parameters.size())
       return true;
-  }
-  else
-  {
-    for (unsigned int i = 0; i < sizeof(commands)/sizeof(BUILT_IN); i++)
-    {
-      if (StringUtils::EqualsNoCase(function, commands[i].command) && (!commands[i].needsParameters || parameters.size()))
-        return true;
-    }
   }
 
   return false;
@@ -241,14 +222,6 @@ void CBuiltins::GetHelp(std::string &help)
     help += it.second.description;
     help += "\n";
   }
-
-  for (unsigned int i = 0; i < sizeof(commands)/sizeof(BUILT_IN); i++)
-  {
-    help += commands[i].command;
-    help += "\t";
-    help += commands[i].description;
-    help += "\n";
-  }
 }
 
 int CBuiltins::Execute(const std::string& execString)
@@ -273,13 +246,6 @@ int CBuiltins::Execute(const std::string& execString)
                           execute.c_str(), it->second.parameters, params.size());
       return -1;
     }
-  }
-
-  if (execute == "startandroidactivity" && !params.empty())
-  {
-    CApplicationMessenger::Get().StartAndroidActivity(params);
-  }
-  else
+  } else
     return CInputManager::Get().ExecuteBuiltin(execute, params);
-  return 0;
 }
