@@ -315,7 +315,7 @@ void CMediaSettings::OnSettingAction(const CSetting *setting)
       g_application.StartMusicCleanup(true);
   }
   else if (settingId == "musiclibrary.export")
-    CBuiltins::Execute("exportlibrary(music)");
+    CBuiltins::Get().Execute("exportlibrary(music)");
   else if (settingId == "musiclibrary.import")
   {
     std::string path;
@@ -335,7 +335,7 @@ void CMediaSettings::OnSettingAction(const CSetting *setting)
       g_application.StartVideoCleanup(true);
   }
   else if (settingId == "videolibrary.export")
-    CBuiltins::Execute("exportlibrary(video)");
+    CBuiltins::Get().Execute("exportlibrary(video)");
   else if (settingId == "videolibrary.import")
   {
     std::string path;

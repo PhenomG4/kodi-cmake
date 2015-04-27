@@ -587,7 +587,7 @@ void CApplicationMessenger::ProcessMessage(ThreadMessage *pMsg)
       break;
 
     case TMSG_EXECUTE_BUILT_IN:
-      CBuiltins::Execute(pMsg->strParam.c_str());
+      CBuiltins::Get().Execute(pMsg->strParam.c_str());
       break;
 
     case TMSG_PLAYLISTPLAYER_PLAY:
