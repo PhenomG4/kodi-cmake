@@ -29,6 +29,7 @@
 #include "threads/CriticalSection.h"
 #include "Application.h"
 #include "GUIInfoManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "interfaces/builtins/Builtins.h"
 #include "input/ButtonTranslator.h"
 #include "threads/SingleLock.h"
@@ -356,7 +357,13 @@ bool CEventServer::ExecuteNextAction()
           CButtonTranslator::TranslateActionString(function.c_str(), actionID);
           CAction action(actionID, 1.0f, 0.0f, actionEvent.actionName);
           g_audioManager.PlayActionSound(action);
+          int currentWindow = g_windowManager.GetActiveWindow();
           g_application.OnAction(action);
+          // need to return false or screensaver is immediately reset
+          // in CInputManager::ProcessEventServer()
+          if (g_windowManager.GetActiveWindow() == WINDOW_SCREENSAVER &&
+              currentWindow != WINDOW_SCREENSAVER)
+            return false;
         }
         break;
       }
