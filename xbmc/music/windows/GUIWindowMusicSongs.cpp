@@ -415,20 +415,6 @@ bool CGUIWindowMusicSongs::Update(const std::string &strDirectory, bool updateFi
   return true;
 }
 
-void CGUIWindowMusicSongs::OnRemoveSource(int iItem)
-{
-  bool bCanceled;
-  if (CGUIDialogYesNo::ShowAndGetInput(522, 20340, -1, -1, bCanceled))
-  {
-    MAPSONGS songs;
-    CMusicDatabase database;
-    database.Open();
-    database.RemoveSongsFromPath(m_vecItems->Get(iItem)->GetPath(),songs,false);
-    database.CleanupOrphanedItems();
-    g_infoManager.ResetLibraryBools();
-  }
-}
-
 std::string CGUIWindowMusicSongs::GetStartFolder(const std::string &dir)
 {
   SetupShares();
